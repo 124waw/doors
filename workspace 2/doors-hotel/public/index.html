@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>DOORS — THE HOTEL</title>
+<link rel="icon" href="data:," />
+<link rel="stylesheet" href="/css/style.css" />
+<script type="importmap">
+{
+  "imports": {
+    "three": "/vendor/three.module.js"
+  }
+}
+</script>
+</head>
+<body>
+<div id="app">
+  <canvas id="scene"></canvas>
+
+  <!-- HUD -->
+  <div id="hud" class="hidden">
+    <div id="crosshair"></div>
+    <div id="interactHint" class="hidden"><span class="key">E</span> <span id="interactText">Interact</span></div>
+
+    <div id="topbar">
+      <div id="roomInfo">
+        <div class="room-label">ROOM</div>
+        <div id="roomNumber">000</div>
+      </div>
+      <div id="objective">Find the key and unlock the door</div>
+    </div>
+
+    <div id="hintbar"></div>
+
+    <div id="bottombar">
+      <div id="healthWrap">
+        <div id="healthFill"></div>
+        <div id="healthText">100</div>
+      </div>
+      <div id="items">
+        <div class="item" id="itemLight">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 2h6v3l-1 1v2l3 2.5V12H7v-1.5L10 8V6L9 5z"/><rect x="9" y="14" width="6" height="8" rx="1"/></svg></div>
+          <div class="k">F</div>
+        </div>
+        <div class="item" id="itemKey">
+          <div class="ico"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="8" r="4"/><path d="M11 11l9 9-2 2-2-2-1.5 1.5-2-2L11 18l-2-2 2-2z"/></svg></div>
+          <div class="k">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="playersHud"></div>
+    <div id="chatLog"></div>
+    <div id="chatInputWrap" class="hidden"><input id="chatInput" maxlength="120" placeholder="Press Enter to chat..." /></div>
+    <div id="entityAlert" class="hidden"></div>
+    <div id="vignette"></div>
+  </div>
+
+  <!-- Main menu -->
+  <div id="menu" class="screen">
+    <div class="menu-card">
+      <h1>DOORS</h1>
+      <div class="subtitle">THE HOTEL</div>
+      <p class="blurb">A web-based co-op recreation. Up to 4 guests. Find the keys, open the doors, and survive what is waiting in the dark.</p>
+      <input id="nameInput" maxlength="14" placeholder="Your name" />
+      <input id="codeInput" maxlength="6" placeholder="Room code (blank = create)" />
+      <div class="menu-btns">
+        <button id="joinBtn">JOIN ROOM</button>
+        <button id="createBtn" class="ghost">CREATE ROOM</button>
+      </div>
+      <div id="menuMsg"></div>
+      <div class="controls">
+        <div><b>WASD</b> Move</div>
+        <div><b>Mouse</b> Look</div>
+        <div><b>Shift</b> Sprint</div>
+        <div><b>E</b> Interact / Hide</div>
+        <div><b>F</b> Flashlight</div>
+        <div><b>Enter</b> Chat</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lobby -->
+  <div id="lobby" class="screen hidden">
+    <div class="menu-card">
+      <h1>THE LOBBY</h1>
+      <div class="subtitle">waiting for guests</div>
+      <div class="room-code">
+        <div class="rc-label">ROOM CODE</div>
+        <div class="rc-row">
+          <span id="roomCodeDisplay">----</span>
+          <button id="copyCodeBtn" class="mini">COPY</button>
+        </div>
+        <div class="rc-hint">Share this code so friends can join.</div>
+      </div>
+      <ul id="lobbyPlayers"></ul>
+      <button id="startBtn">ENTER THE HOTEL</button>
+      <p class="blurb small">The floor is generated fresh each run.</p>
+    </div>
+  </div>
+
+  <!-- Click to play -->
+  <div id="lockOverlay" class="screen hidden">
+    <div class="menu-card small-card">
+      <h2>CLICK TO RESUME</h2>
+      <p class="blurb">Mouse look is paused.</p>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div id="result" class="screen hidden">
+    <div class="menu-card">
+      <h1 id="resultTitle">YOU WIN</h1>
+      <div id="resultSub" class="subtitle"></div>
+      <button id="againBtn">PLAY AGAIN</button>
+    </div>
+  </div>
+
+  <div id="loading" class="screen"><div class="menu-card small-card"><h2>LOADING HOTEL…</h2></div></div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script type="module" src="/js/main.js"></script>
+</body>
+</html>

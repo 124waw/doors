@@ -1,0 +1,19 @@
+{
+  "name": "doors-hotel",
+  "version": "1.0.0",
+  "description": "Web multiplayer recreation of the Hotel floor from DOORS",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5",
+    "three": "^0.160.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
